@@ -100,14 +100,14 @@ make install
 
 ## (Alternative) Building with custom Squirrel library
 
-Use the `SQUIRREL_LIBRARIESRARIES`, `SQSTDLIB_LIBRARIESRARIESRARIES`, and `SQUIRREL_INCLUDE_DIR` optional CMake args if you wish to compile this library with your already existing Squirrel library. If you do not supply these arguments, the Squirrel library will be built for you automatically!
+Use the `SQUIRREL_LIBRARIES`, `SQSTDLIB_LIBRARIES`, and `SQUIRREL_INCLUDE_DIR` optional CMake args if you wish to compile this library with your already existing Squirrel library. If you do not supply these arguments, the Squirrel library will be built automatically for you (using git submodules)!
 
 ```bash
 cmake .. -G "Visual Studio 15 2017" \
     -DCMAKE_INSTALL_PREFIX=C:/whatever/folder/you/want \
     -DSQUIRREL_INCLUDE_DIR=C:/Users/username/Documents/squirrel/include \
-    -DSQUIRREL_LIBRARIESRARIES=C:/Users/username/Documents/squirrel/build/squirrel/MinSizeRel/squirrel_static.lib \
-    -DSQSTDLIB_LIBRARIESRARIESRARIES=C:/Users/username/Documents/squirrel/build/sqstdlib/MinSizeRel/sqstdlib_static.lib \
+    -SQUIRREL_LIBRARIES=C:/Users/username/Documents/squirrel/build/squirrel/MinSizeRel/squirrel_static.lib \
+    -SQSTDLIB_LIBRARIES=C:/Users/username/Documents/squirrel/build/sqstdlib/MinSizeRel/sqstdlib_static.lib \
     -DBUILD_TESTS=OFF \
     -DBUILD_EXAMPLES=OFF
 ```

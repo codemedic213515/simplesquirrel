@@ -79,7 +79,8 @@ install:
   - cmd: git submodule update
   - cmd: if [%COMPILER%]==[mingw] (mkdir build-debug)
   - cmd: if [%COMPILER%]==[mingw] (mkdir build-release)
-  - cmd: if [%COMPILER%]==[msvc] (mkdir build)
+  - cmd: if [%COMPILER%]==[msvc] (mkdir build-debug)
+  - cmd: if [%COMPILER%]==[msvc] (mkdir build-release)
   - cmd: set PATH=%PATH:C:\Program Files\Git\usr\bin;=%
   - cmd: set PATH=%MINGW_DIR_BIN%;%PATH%
   - cmd: if [%COMPILER%]==[mingw] (cd build-debug & cmake .. -G %GENERATOR% -DCMAKE_INSTALL_PREFIX="..\install" -DCMAKE_BUILD_TYPE=Debug -DCMAKE_DEBUG_POSTFIX=_d || exit 1 & cd ..)
