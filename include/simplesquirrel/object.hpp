@@ -24,7 +24,7 @@
 #include <string>
 #include <squirrel.h>
 #include <unordered_map>
-
+#include <stdint.h>
 #include "exceptions.hpp"
 #include "type.hpp"
 

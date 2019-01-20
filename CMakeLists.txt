@@ -12,7 +12,7 @@ option(BUILD_EXAMPLES "Build examples" ON)
 option(BUILD_INSTALL "Install library" ON)
 
 # Add third party libraries
-if(NOT DEFINED SQUIRREL_LIB AND NOT DEFINED SQSTDLIB_LIB)
+if(NOT DEFINED SQUIRREL_LIBRARIES AND NOT DEFINED SQSTDLIB_LIBRARIESRARIES)
   ExternalProject_Add(SQUIRREL
     DOWNLOAD_COMMAND ""
     SOURCE_DIR ${CMAKE_SOURCE_DIR}/libs/squirrel
@@ -24,12 +24,12 @@ if(NOT DEFINED SQUIRREL_LIB AND NOT DEFINED SQSTDLIB_LIB)
 
   if(MSVC)
     set(SQUIRREL_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/libs/squirrel/include)
-    set(SQUIRREL_LIB ${CMAKE_BINARY_DIR}/SQUIRREL-prefix/src/SQUIRREL-build/squirrel/${CMAKE_BUILD_TYPE}/squirrel_static.lib)
-    set(SQSTDLIB_LIB ${CMAKE_BINARY_DIR}/SQUIRREL-prefix/src/SQUIRREL-build/sqstdlib/${CMAKE_BUILD_TYPE}/sqstdlib_static.lib)
+    set(SQUIRREL_LIBRARIES ${CMAKE_BINARY_DIR}/SQUIRREL-prefix/src/SQUIRREL-build/squirrel/${CMAKE_BUILD_TYPE}/squirrel_static.lib)
+    set(SQSTDLIB_LIBRARIESRARIES ${CMAKE_BINARY_DIR}/SQUIRREL-prefix/src/SQUIRREL-build/sqstdlib/${CMAKE_BUILD_TYPE}/sqstdlib_static.lib)
   else()
     set(SQUIRREL_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/libs/squirrel/include)
-    set(SQUIRREL_LIB ${CMAKE_BINARY_DIR}/SQUIRREL-prefix/src/SQUIRREL-build/squirrel/libsquirrel_static.a)
-    set(SQSTDLIB_LIB ${CMAKE_BINARY_DIR}/SQUIRREL-prefix/src/SQUIRREL-build/sqstdlib/libsqstdlib_static.a)
+    set(SQUIRREL_LIBRARIES ${CMAKE_BINARY_DIR}/SQUIRREL-prefix/src/SQUIRREL-build/squirrel/libsquirrel_static.a)
+    set(SQSTDLIB_LIBRARIESRARIES ${CMAKE_BINARY_DIR}/SQUIRREL-prefix/src/SQUIRREL-build/sqstdlib/libsqstdlib_static.a)
   endif()
 endif()
 
@@ -47,8 +47,8 @@ add_library(${PROJECT_NAME} SHARED ${SOURCES} ${HEADERS})
 add_dependencies(${PROJECT_NAME} SQUIRREL)
 add_dependencies(${PROJECT_NAME}_static SQUIRREL)
 target_compile_definitions(${PROJECT_NAME} PRIVATE SSQ_EXPORTS=1 SSQ_DLL=1)
-target_link_libraries(${PROJECT_NAME} ${SQUIRREL_LIB})
-target_link_libraries(${PROJECT_NAME} ${SQSTDLIB_LIB})
+target_link_libraries(${PROJECT_NAME} ${SQUIRREL_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} ${SQSTDLIB_LIBRARIESRARIES})
 
 set_property(TARGET ${PROJECT_NAME} PROPERTY FOLDER "simplesquirrel/lib")
 set_property(TARGET ${PROJECT_NAME}_static PROPERTY FOLDER "simplesquirrel/lib")

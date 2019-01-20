@@ -6,6 +6,7 @@ module.exports = {
     sidebar: "auto",
     nav: [
       { text: "Home", link: "/" },
+      { text: "Install", link: "/INSTALL" },
       { text: "Modules", link: "/doxygen/modules" },
       {
         text: "Classes",

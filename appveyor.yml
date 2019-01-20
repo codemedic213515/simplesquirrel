@@ -84,27 +84,26 @@ install:
   - cmd: set PATH=%MINGW_DIR_BIN%;%PATH%
   - cmd: if [%COMPILER%]==[mingw] (cd build-debug & cmake .. -G %GENERATOR% -DCMAKE_INSTALL_PREFIX="..\install" -DCMAKE_BUILD_TYPE=Debug -DCMAKE_DEBUG_POSTFIX=_d || exit 1 & cd ..)
   - cmd: if [%COMPILER%]==[mingw] (cd build-release & cmake .. -G %GENERATOR% -DCMAKE_INSTALL_PREFIX="..\install" -DCMAKE_BUILD_TYPE=MinSizeRel -DCMAKE_DEBUG_POSTFIX=_d || exit 1 & cd ..)
-  - cmd: if [%COMPILER%]==[msvc] (cd build & cmake .. -G %GENERATOR% -DCMAKE_INSTALL_PREFIX="..\install" -DCMAKE_DEBUG_POSTFIX=_d || exit 1 & cd ..)
+  - cmd: if [%COMPILER%]==[msvc] (cd build-debug & cmake .. -G %GENERATOR% -DCMAKE_INSTALL_PREFIX="..\install" -DCMAKE_BUILD_TYPE=Debug -DCMAKE_DEBUG_POSTFIX=_d || exit 1 & cd ..)
+  - cmd: if [%COMPILER%]==[msvc] (cd build-release & cmake .. -G %GENERATOR% -DCMAKE_INSTALL_PREFIX="..\install" -DCMAKE_BUILD_TYPE=MinSizeRel -DCMAKE_DEBUG_POSTFIX=_d || exit 1 & cd ..)
 
 build_script:
   - cmd: if [%COMPILER%]==[mingw] (cd build-debug & cmake --build . --target all || exit 1 & cd ..)
   - cmd: if [%COMPILER%]==[mingw] (cd build-release & cmake --build . --target all || exit 1 & cd ..)
-  - cmd: if [%COMPILER%]==[msvc] (cd build & cmake --build . --target ALL_BUILD --config Debug || exit 1 & cd ..)
-  - cmd: if [%COMPILER%]==[msvc] (cd build & cmake --build . --target ALL_BUILD --config MinSizeRel || exit 1 & cd ..)
+  - cmd: if [%COMPILER%]==[msvc] (cd build-debug & cmake --build . --target ALL_BUILD --config Debug || exit 1 & cd ..)
+  - cmd: if [%COMPILER%]==[msvc] (cd build-release & cmake --build . --target ALL_BUILD --config MinSizeRel || exit 1 & cd ..)
 
 test_script:
   - cmd: if [%COMPILER%]==[mingw] (cd build-debug & ctest --verbose -E "test_gl" || exit 1 & cd ..)
   - cmd: if [%COMPILER%]==[mingw] (cd build-release & ctest --verbose -E "test_gl" || exit 1 & cd ..)
-  - cmd: if [%COMPILER%]==[msvc] (cd build & ctest --verbose -C "Debug" -E "test_gl" || exit 1 & cd ..)
-  - cmd: if [%COMPILER%]==[msvc] (cd build & ctest --verbose -C "MinSizeRel" -E "test_gl" || exit 1 & cd ..)
+  - cmd: if [%COMPILER%]==[msvc] (cd build-debug & ctest --verbose -C "Debug" -E "test_gl" || exit 1 & cd ..)
+  - cmd: if [%COMPILER%]==[msvc] (cd build-release & ctest --verbose -C "MinSizeRel" -E "test_gl" || exit 1 & cd ..)
 
 after_test:
   - cmd: if [%COMPILER%]==[mingw] (cd build-debug & cmake --build . --target install || exit 1 & cd ..)
-  - cmd: if [%COMPILER%]==[msvc] (cd build & cmake --build . --target INSTALL --config Debug || exit 1 & cd ..)
-#  - cmd: ren install debug
+  - cmd: if [%COMPILER%]==[msvc] (cd build-debug & cmake --build . --target INSTALL --config Debug || exit 1 & cd ..)
   - cmd: if [%COMPILER%]==[mingw] (cd build-release & cmake --build . --target install || exit 1 & cd ..)
-  - cmd: if [%COMPILER%]==[msvc] (cd build & cmake --build . --target INSTALL --config MinSizeRel || exit 1 & cd ..)
-#  - cmd: ren install release
+  - cmd: if [%COMPILER%]==[msvc] (cd build-release & cmake --build . --target INSTALL --config MinSizeRel || exit 1 & cd ..)
   - cmd: 7z.exe a "simplesquirrel-%ARCH%-%TOOLSET%.zip" .\install || exit 1
 
 before_deploy:
