@@ -22,5 +22,12 @@ foreach(test ${TESTS})
         set_target_properties(${test} PROPERTIES LINK_FLAGS "/SUBSYSTEM:CONSOLE")
     endif(MSVC)
 
+    if(MSVC)
+        set_target_properties(${test} PROPERTIES LINK_FLAGS "/bigobj")
+    endif()
+    if(MINGW)
+        set_target_properties(${test} PROPERTIES COMPILE_FLAGS "-Wa,-mbig-obj")
+    endif()
+
     set_property(TARGET ${test} PROPERTY FOLDER "simplesquirrel/tests")
 endforeach(test)

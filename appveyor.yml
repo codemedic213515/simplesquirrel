@@ -33,18 +33,6 @@ environment:
     MINGW_DIR_BIN: C:\mingw-w64\x86_64-6.3.0-posix-seh-rt_v5-rev1\mingw64\bin
     CMAKE_C_COMPILER: C:/mingw-w64/x86_64-6.3.0-posix-seh-rt_v5-rev1/mingw64/bin/gcc.exe
     CMAKE_CXX_COMPILER: C:/mingw-w64/x86_64-6.3.0-posix-seh-rt_v5-rev1/mingw64/bin/g++.exe
-  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2013
-    COMPILER: msvc
-    MINGW_DIR_BIN: ''
-    TOOLSET: vc12
-    ARCH: win32
-    GENERATOR: '"Visual Studio 12 2013"'
-  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2013
-    COMPILER: msvc
-    MINGW_DIR_BIN: ''
-    TOOLSET: vc12
-    ARCH: win64
-    GENERATOR: '"Visual Studio 12 2013 Win64"'
   - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
     COMPILER: msvc
     MINGW_DIR_BIN: ''
@@ -95,17 +83,17 @@ build_script:
   - cmd: if [%COMPILER%]==[msvc] (cd build-release & cmake --build . --target ALL_BUILD --config MinSizeRel || exit 1 & cd ..)
 
 test_script:
-  - cmd: if [%COMPILER%]==[mingw] (cd build-debug & ctest --verbose -E "test_gl" || exit 1 & cd ..)
-  - cmd: if [%COMPILER%]==[mingw] (cd build-release & ctest --verbose -E "test_gl" || exit 1 & cd ..)
-  - cmd: if [%COMPILER%]==[msvc] (cd build-debug & ctest --verbose -C "Debug" -E "test_gl" || exit 1 & cd ..)
-  - cmd: if [%COMPILER%]==[msvc] (cd build-release & ctest --verbose -C "MinSizeRel" -E "test_gl" || exit 1 & cd ..)
+  - cmd: if [%COMPILER%]==[mingw] (cd build-debug & ctest --verbose || exit 1 & cd ..)
+  - cmd: if [%COMPILER%]==[mingw] (cd build-release & ctest --verbose || exit 1 & cd ..)
+  - cmd: if [%COMPILER%]==[msvc] (cd build-debug & ctest --verbose -C "Debug" || exit 1 & cd ..)
+  - cmd: if [%COMPILER%]==[msvc] (cd build-release & ctest --verbose -C "MinSizeRel" || exit 1 & cd ..)
 
 after_test:
   - cmd: if [%COMPILER%]==[mingw] (cd build-debug & cmake --build . --target install || exit 1 & cd ..)
   - cmd: if [%COMPILER%]==[msvc] (cd build-debug & cmake --build . --target INSTALL --config Debug || exit 1 & cd ..)
   - cmd: if [%COMPILER%]==[mingw] (cd build-release & cmake --build . --target install || exit 1 & cd ..)
   - cmd: if [%COMPILER%]==[msvc] (cd build-release & cmake --build . --target INSTALL --config MinSizeRel || exit 1 & cd ..)
-  - cmd: 7z.exe a "simplesquirrel-%ARCH%-%TOOLSET%.zip" .\install || exit 1
+  - cmd: 7z.exe a "simplesquirrel-%ARCH%-%TOOLSET%.zip" .\install\* || exit 1
 
 before_deploy:
   - cmd: call .\next_git_tag.bat
