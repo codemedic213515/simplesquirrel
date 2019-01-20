@@ -43,7 +43,7 @@ compile_gcc: &compile_gcc
         command: |
           GCC_MACHINE=$(gcc -dumpmachine)
           GCC_VERSION=$(gcc -dumpversion)
-          cd install && zip -r "../finegraphics-$GCC_MACHINE-$GCC_VERSION.zip" * && cd ..
+          cd install && zip -r "../simplesquirrel-$GCC_MACHINE-$GCC_VERSION.zip" * && cd ..
           mkdir /tmp/install
           cp *.zip /tmp/install
           
@@ -61,7 +61,7 @@ compile_gcc: &compile_gcc
             GCC_VERSION=$(gcc -dumpversion)
             source ./next_git_tag.sh
             ./bin/linux/amd64/github-release release --user $CIRCLE_PROJECT_USERNAME --repo $CIRCLE_PROJECT_REPONAME --tag $GITHUB_RELEASE_TAG --name "Compiled - $GITHUB_RELEASE_TAG" --description "$COMMIT_MESSAGE" || true
-            ./bin/linux/amd64/github-release upload --user $CIRCLE_PROJECT_USERNAME --repo $CIRCLE_PROJECT_REPONAME --tag $GITHUB_RELEASE_TAG --replace --name finegraphics-$GCC_MACHINE-$GCC_VERSION.zip --file finegraphics-$GCC_MACHINE-$GCC_VERSION.zip
+            ./bin/linux/amd64/github-release upload --user $CIRCLE_PROJECT_USERNAME --repo $CIRCLE_PROJECT_REPONAME --tag $GITHUB_RELEASE_TAG --replace --name simplesquirrel-$GCC_MACHINE-$GCC_VERSION.zip --file finegraphics-$GCC_MACHINE-$GCC_VERSION.zip
           fi
 
 version: 2
@@ -165,9 +165,12 @@ workflows:
       - compile_gcc_730:
           requires:
             - compile_gcc_640
-      - build_docs:
+      - compile_gcc_820:
           requires:
             - compile_gcc_730
+      - build_docs:
+          requires:
+            - compile_gcc_820
           filters:
             branches:
               only:
