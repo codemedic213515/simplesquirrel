@@ -5,7 +5,7 @@
 | master  | [![CircleCI](https://circleci.com/gh/matusnovak/simplesquirrel/tree/master.svg?style=svg)](https://circleci.com/gh/matusnovak/simplesquirrel/tree/master) | [![Build Status](https://travis-ci.org/matusnovak/simplesquirrel.svg?branch=master)](https://travis-ci.org/matusnovak/simplesquirrel) | [![Build status](https://ci.appveyor.com/api/projects/status/hk9m6f62csx8llvy/branch/master?svg=true)](https://ci.appveyor.com/project/matusnovak/simplesquirrel/branch/devel) |
 | devel  | [![CircleCI](https://circleci.com/gh/matusnovak/simplesquirrel/tree/devel.svg?style=svg)](https://circleci.com/gh/matusnovak/simplesquirrel/tree/devel) | [![Build Status](https://travis-ci.org/matusnovak/simplesquirrel.svg?branch=devel)](https://travis-ci.org/matusnovak/simplesquirrel) | [![Build status](https://ci.appveyor.com/api/projects/status/hk9m6f62csx8llvy/branch/devel?svg=true)](https://ci.appveyor.com/project/matusnovak/simplesquirrel/branch/devel) |
 
-*The following compilers are tested in the CI above: Visual Studio 2013, Visual Studio 2013 Win64, Visual Studio 2015, Visual Studio 2015 Win64, Visual Studio 2017, Visual Studio 2017 Win64, MinGW-w64 i686, MinGW-w64 x86_64, Linux GCC 5.5.0, Linux GCC 6.4.0, Linux GCC 5.5.0, Linux GCC 7.3.0, Linux GCC 8.2.0, and OSX Clang 3.7*
+*The following compilers are tested in the CI above: Visual Studio 2015, Visual Studio 2015 Win64, Visual Studio 2017, Visual Studio 2017 Win64, MinGW-w64 i686, MinGW-w64 x86_64, Linux GCC 5.5.0, Linux GCC 6.4.0, Linux GCC 7.3.0, Linux GCC 8.2.0, and OSX Clang 3.7*
 
 Yet another simple binding in C++11 for [Squirrel scripting language](http://www.squirrel-lang.org/)
 
@@ -18,9 +18,9 @@ API Documentation can be found here: <https://matusnovak.github.io/simplesquirre
 * C++11
 * Supports multiple virtual machines
 * Supports lambdas
-* Works on Windows (Visual Studio or MinGW)
-* Works on Linux (GCC)
-* Works on OSX (Clang)
+* Works on Windows (Visual Studio 2015 or newer) (or MinGW 4.9 or newer)
+* Works on Linux (GCC 4.9 or newer)
+* Works on OSX (Clang 3.7 or newer)
 * Very easy object manipulation
 * Supports binding of C++ classes to multiple instances of Squirrel VM
 * Strict type checking on C++ side

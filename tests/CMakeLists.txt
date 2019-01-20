@@ -23,7 +23,7 @@ foreach(test ${TESTS})
     endif(MSVC)
 
     if(MSVC)
-        set_target_properties(${test} PROPERTIES LINK_FLAGS "/bigobj")
+        set_target_properties(${test} PROPERTIES COMPILE_FLAGS "/bigobj")
     endif()
     if(MINGW)
         set_target_properties(${test} PROPERTIES COMPILE_FLAGS "-Wa,-mbig-obj")
