@@ -1,7 +1,7 @@
 # SimpleSquirrel
 Yet another simple binding in C++11 for [Squirrel scripting language](http://www.squirrel-lang.org/)
 
-API Documentation can be found here: <https://matusnovak.github.io/simplesquirrel/docs/ssq.html>
+API Documentation can be found here: <https://matusnovak.github.io/simplesquirrel/doxygen/group__simplesquirrel.html>
 
 ## Features
 

@@ -45,6 +45,7 @@ namespace ssq {
 
     /**
     * @brief Raw Squirrel object
+    * @ingroup simplesquirrel
     */
     class SSQ_API Object {
     public:

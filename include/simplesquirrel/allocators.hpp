@@ -95,6 +95,9 @@ namespace ssq {
         }
     }
 
+    /**
+     * @ingroup simplesquirrel
+     */
     template<typename T>
     inline T Object::to() const {
         sq_pushobject(vm, obj);
